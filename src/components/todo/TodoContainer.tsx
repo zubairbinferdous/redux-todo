@@ -1,8 +1,11 @@
+import { useAppSelector } from "@/redux/hook";
 import AddtodoArea from "./AddtodoArea";
 import TodoCard from "./TodoCard";
 import Todofilter from "./Todofilter";
 
 const TodoContainer = () => {
+  const { todos } = useAppSelector((state) => state.todo); // ?
+  console.log(todos);
   return (
     <div>
       <div className="p-4">
@@ -15,7 +18,14 @@ const TodoContainer = () => {
             <p>there is no task pending </p>
           </div>
 
-          <TodoCard></TodoCard>
+          {todos.map((data) => (
+            <TodoCard
+              id={data.id}
+              title={data.title}
+              discription={data.description}
+              isCompleted={data.isComplicate}
+            ></TodoCard>
+          ))}
         </div>
       </div>
     </div>
